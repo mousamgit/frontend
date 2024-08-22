@@ -1,6 +1,6 @@
-# Sociair Consumer (sociair-consumer-frontend)
+# PIM ORDER
 
-Social Earning
+PIM ORDER
 
 ## Install the dependencies
 ```bash
