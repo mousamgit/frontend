@@ -15,7 +15,12 @@ export default {
   all:{
     users: 'Users',
     roles: 'Roles',
-    permissions: 'Permissions'
+    permissions: 'Permissions',
+    name: "Name",
+    email: "Email",
+    role: "Role",
+    password: "Password",
+    confirm_password: "Confirm Password"
   },
   app:{
     title:'PIM ORDER'

@@ -112,7 +112,7 @@ export default defineComponent({
       }
     };
     const navigateToFirstAvailableDashboardRoute = () => {
-     
+       
       const routePermissions = [
         { name: 'Dashboard', permission: 'view-dashboard' },
       ];
