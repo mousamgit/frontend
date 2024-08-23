@@ -28,9 +28,6 @@ export function submitLogin(state, data) {
           refresh_token: refresh_token,
           logintype: 'admin'
         });
-
-        // state.dispatch("fetch");
-
         resolve(response);
       })
       .catch(error => {

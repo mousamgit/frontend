@@ -7,10 +7,12 @@
 // https://quasar.dev/quasar-cli/quasar-conf-js
 
 /* eslint-env node */
+
 const ESLintPlugin = require('eslint-webpack-plugin')
 const { configure } = require('quasar/wrappers');
 
 module.exports = configure(function (ctx) {
+ 
   return {
     // https://quasar.dev/quasar-cli/supporting-ts
     supportTS: false,
@@ -26,10 +28,11 @@ module.exports = configure(function (ctx) {
       'axios',
       'logrocket'
     ],
-
+   
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: [
-      'app.scss'
+      'app.scss',
+      'style.css' // Reference your global CSS file correctly here
     ],
 
     // https://github.com/quasarframework/quasar/tree/dev/extras
@@ -145,8 +148,8 @@ module.exports = configure(function (ctx) {
       },
 
       manifest: {
-        name: `Sociair Consumer`,
-        short_name: `Sociair Consumer`,
+        name: `Pim Order`,
+        short_name: `Pim Order`,
         description: `Social Earning`,
         display: 'standalone',
         orientation: 'portrait',

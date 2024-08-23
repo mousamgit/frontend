@@ -13,8 +13,8 @@ export default function () {
   const checkIfUserHasPermissions = function (permissions) {
     if (currentUser.value) {
       const user = currentUser.value;
+      console.log(user)
       if (user) {
-        // return true;
         let p = _.clone(user.permissions);
         p = p.map(r => {
           return r.name;
@@ -36,26 +36,26 @@ export default function () {
       route: "User",
       icon: "mdi-account-cog-outline",
       label: "all.users",
-      checkPermission: ['view-users', 'manage-users']
+      checkPermission: ['view-users']
     },
     {
       route: "Roles",
       icon: "mdi-shield-account-outline",
       label: "all.roles",
-      checkPermission: ['view-roles', 'manage-roles']
+      checkPermission: ['view-roles']
     },
     {
       route: "Permissions",
       icon: "mdi-shield-key-outline",
       label: "all.permissions",
-      checkPermission: ['view-permissions', 'manage-permissions']
+      checkPermission: ['view-permissions']
     },
   ])
 
   const userManagementPermissions  = ref([
-    'view-users', 'manage-users',
-    'view-roles', 'manage-roles',
-    'view-permissions', 'manage-permissions'
+    'view-users', 'create-users','update-users','delete-users','export-users',
+    'view-roles', 'create-roles','update-roles','delete-roles','export-roles',
+    'view-permissions', 'create-permissions','update-permissions','delete-permissions','export-permissions'
   ])
   return {
     currentUser,
