@@ -14,7 +14,7 @@ export default function () {
       $store.commit('auth/setCurrentUser', val)
     }
   })
-  const logo = require('https://pim.samsgroup.info/sga-pim-redwhite-horizontal.png')
+  const logo = require('src/assets/icons/icon.png')
   const $router = useRouter();
   return {
     currentUser,

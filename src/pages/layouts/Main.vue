@@ -21,7 +21,10 @@
               {{ $t('app.title') }}
             </q-item-section>
           </q-item>
-          <q-item clickable v-ripple>
+          <q-item 
+             @click="navigateToFirstAvailableDashboardRoute" 
+             :active="currentRoute === 'Dashboard'"
+             clickable v-ripple>
             <q-item-section avatar>
               <q-icon size="" name="mdi-view-grid-plus-outline"/>
             </q-item-section>
@@ -30,7 +33,13 @@
             </q-item-section>
           </q-item>
 
-          <q-item :active="route.name=='User' || route.name=='Roles' || route.name=='Permissions'" v-if="checkIfUserHasPermissions(userManagementPermissions)" @click="router.push({name: 'User'})" clickable v-ripple>
+          <q-item 
+            :active="currentRoute === 'User' || currentRoute === 'Roles' || currentRoute === 'Permissions'"
+            v-if="checkIfUserHasPermissions(userManagementPermissions)" 
+            @click="navigateToFirstAvailableUserRoute" 
+            clickable 
+            v-ripple
+          >
             <q-item-section avatar>
               <q-icon size="" name="mdi-account-circle-outline"/>
             </q-item-section>
@@ -39,7 +48,7 @@
             </q-item-section>
           </q-item>
 
-          <q-item  @click="logoutNow" clickable v-ripple>
+          <q-item @click="logoutNow" clickable v-ripple>
             <q-item-section avatar>
               <q-icon size="" name="mdi-logout"/>
             </q-item-section>
@@ -57,38 +66,70 @@
   </q-layout>
 </template>
 
-
 <script>
-
-
-import {defineComponent, ref, computed} from 'vue'
-import {useStore} from "vuex";
-import {useQuasar} from 'quasar'
-import user from "pages/dashboard/user";
-import {useRouter, useRoute} from "vue-router";
-import userManagement from "src/composables/userManagement";
+import { defineComponent, ref, computed } from 'vue'
+import { useStore } from 'vuex'
+import { useQuasar } from 'quasar'
+import { useRouter, useRoute } from 'vue-router'
+import user from 'pages/dashboard/user'
+import userManagement from 'src/composables/userManagement'
 
 export default defineComponent({
   name: 'MainLayout',
 
-  components: {},
-
   setup() {
-    const router = useRouter();
-    const route = useRoute();
+    const router = useRouter()
+    const route = useRoute()
     const currentRoute = computed(() => route.name)
     const $q = useQuasar()
     const $store = useStore()
     const leftDrawerOpen = ref(false)
     const miniModeDrawer = ref(true)
-    const logoutNow = () => {
 
-      $q.loading.show();
+    const { currentUser, logo } = user()
+    const { userManagementPermissions, checkIfUserHasPermissions } = userManagement()
+
+    const logoutNow = () => {
+      $q.loading.show()
       $store.dispatch('auth/logout')
     }
-    const {currentUser, logo} = user();
 
-    const {userManagementPermissions, checkIfUserHasPermissions} = userManagement()
+    const navigateToFirstAvailableUserRoute = () => {
+      const routePermissions = [
+        { name: 'User', permission: 'view-users' },
+        { name: 'Roles', permission: 'view-roles' },
+        { name: 'Permissions', permission: 'view-permissions' }
+      ];
+      const userPermissions = currentUser.value.permissions.map(permission => permission.name);
+
+      for (let i = 0; i < routePermissions.length; i++) {
+        const { name, permission } = routePermissions[i];
+        
+        if (userPermissions.includes(permission)) {
+          router.push({ name });
+          break;
+        }
+      }
+    };
+    const navigateToFirstAvailableDashboardRoute = () => {
+     
+      const routePermissions = [
+        { name: 'Dashboard', permission: 'view-dashboard' },
+      ];
+      const userPermissions = currentUser.value.permissions.map(permission => permission.name);
+       
+      for (let i = 0; i < routePermissions.length; i++) {
+        const { name, permission } = routePermissions[i];
+       
+        if (userPermissions.includes(permission)) {
+          router.push({ name });
+          break;
+        }
+      }
+    };
+
+
+
     return {
       leftDrawerOpen,
       logoutNow,
@@ -98,8 +139,9 @@ export default defineComponent({
       currentUser,
       logo,
       router,
-      route,
       currentRoute,
+      navigateToFirstAvailableUserRoute,
+      navigateToFirstAvailableDashboardRoute,
       toggleLeftDrawer() {
         leftDrawerOpen.value = !leftDrawerOpen.value
       }

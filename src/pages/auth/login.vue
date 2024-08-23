@@ -8,10 +8,10 @@
           <div class="column">
             <div class="logo-brand">
               <div class="logo" >
-                <img class="" style="background:none;" alt src="https://pim.samsgroup.info/sga-pim-redwhite-horizontal.png" width="70px" />
+                <img class="logo-image" style="background:none;" alt="SGA PIM Logo" :src="logo" width="70px" />
               </div>
               <div class="text-h6 text-white">
-              PIM ORDER LOGIN
+              PIM ORDER LOGIN 
               </div>
 
               <div class="reg-top-section q-mt-lg">
@@ -138,6 +138,7 @@ import loginData from "./loginData.js";
 import ErrorsList from "pages/errors/errors.vue";
 import errors from "pages/errors/errors";
 import {useRouter} from "vue-router";
+import logo from 'src/assets/icons/icon.png';
 
 export default defineComponent({
   name: 'LoginPage',
@@ -152,6 +153,7 @@ export default defineComponent({
     const submitting = ref(false)
     const showPassword = ref(false)
     const $router = useRouter();
+   
 
     const login = (evt) => {
       validationErrors.value = null
@@ -180,6 +182,7 @@ export default defineComponent({
     };
 
     return {
+      logo,
       otp: require("assets/icons/one-time-password.svg"),
       username,
       password,

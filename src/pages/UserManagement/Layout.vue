@@ -3,7 +3,7 @@
     <q-layout
       :view="'lHh lpR fFf'"
       class="social-sites"
-      :class="$i18n.locale == 'np' ? 'nepali-lang-layout' : ''"
+      :class="$i18n.locale"
     >
       <q-drawer
         v-model="drawer"
@@ -14,7 +14,7 @@
       >
         <template :key="i" v-for="(item, i) in drawerData">
           <template v-if="item.type=='header'">
-            <q-item-label header>{{ item.label }}</q-item-label>
+            <q-item-label header>{{ item.label }} </q-item-label>
             <q-separator color="grey-7"/>
           </template>
           <template v-else>

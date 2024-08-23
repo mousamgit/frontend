@@ -13,7 +13,6 @@ export default function () {
   const checkIfUserHasPermissions = function (permissions) {
     if (currentUser.value) {
       const user = currentUser.value;
-      console.log(user)
       if (user) {
         let p = _.clone(user.permissions);
         p = p.map(r => {

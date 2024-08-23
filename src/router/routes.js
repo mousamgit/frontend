@@ -65,7 +65,7 @@ Route.view("/", "layouts/Auth")
 Route.view("/", "layouts/Main")
   .guard('auth')
   .children(() => {
-    Route.view("/dashboard", "dashboard/dashboard").name('dashboard')
+    Route.view("/dashboard", "dashboard/dashboard").name('Dashboard')
 
     Route.view("user-management", "UserManagement/Layout")
       .guard('auth')

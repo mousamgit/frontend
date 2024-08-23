@@ -12,6 +12,14 @@ export default {
     token: 'Token',
     resend:'Resend'
   },
+  all:{
+    users: 'Users',
+    roles: 'Roles',
+    permissions: 'Permissions'
+  },
+  app:{
+    title:'PIM ORDER'
+  },
   validation:{
     required:'Required'
   },
