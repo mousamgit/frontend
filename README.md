@@ -1,6 +1,4 @@
-# PIM ORDER
-
-PIM ORDER [Manage env dev and prod]
+[Manage env dev and prod]
 
 ## Install the dependencies
 npm install
